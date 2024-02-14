@@ -13,7 +13,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { apiUrl } from '../constant';
-import Pagination from '@mui/material/Pagination';
+
 const sparkAnimation = keyframes`
   0% { transform: scale(1) rotate(0deg); opacity: 0.5; }
   50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
@@ -109,7 +109,7 @@ const AnimatedText = styled(Typography)({
 });
 
 const FeaturedToolsContainer = styled('div')({
-    backgroundColor: '##f5f5f5',
+    backgroundColor: '#e6e6ff',
     color: 'Black',
     minHeight: '100vh',
     display: 'flex',
@@ -230,14 +230,11 @@ const AIcategeory = () => {
     const theme = useTheme();
     const [sparklePosition, setSparklePosition] = useState({ x: 0, y: 0 });
     const[products,setProducts] = useState([])
-    const [currentPage, setCurrentPage] = useState(1);
     const { id } = useParams();
     const handleMouseMove = (e) => {
         setSparklePosition({ x: e.clientX, y: e.clientY });
     };
-    const handlePageChange = (event, page) => {
-        setCurrentPage(page);
-    };
+
     useEffect(() => {
         window.addEventListener('mousemove', handleMouseMove);
 
@@ -251,10 +248,10 @@ const AIcategeory = () => {
     
     const getproductbycategeory = (productId) => {
         axios
-          .get(`${apiUrl}/category/getall`)
+          .get(`${apiUrl}/tool/getbycategory/${productId}`)
           .then((response) => {
             console.log( response.data);
-            const firstFourItems = response.data
+            const firstFourItems = response.data.slice(0, 4);
             setProducts(firstFourItems);
             
           })
@@ -263,7 +260,6 @@ const AIcategeory = () => {
           });
       }
 
-      const itemsPerPage = 8; // Number of items to display per page
     return (
         <>
             <Header />
@@ -307,13 +303,12 @@ const AIcategeory = () => {
 
 
 
-                <CardListContainer container spacing={6}>
-                {products
-                    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                    .map((data) => (
+                <CardListContainer container spacing={3}>
+  {products.map((data) => (
     <Grid item xs={12} md={6} lg={3} key={data._id}>
        <Link to={`/tool/${data._id}`}>
         <CardItem elevation={3}>
+          {/* <a href="https://findmyaitool.com/category/copywriting" target="_blank" rel="noopener noreferrer" /> */}
           <img
             src={Aiimage2}
             alt="Card 1 Image"
@@ -337,25 +332,46 @@ const AIcategeory = () => {
     </Grid>
   ))}
 </CardListContainer>
-<br></br>
-<br></br>
-<br></br>
-<Pagination
-                count={Math.ceil(products.length / itemsPerPage)}
-                variant="outlined" shape="rounded" color='primary'
-                page={currentPage}
-                onChange={handlePageChange}
-            />
 
 
 
+
+<CardListContainer2 container spacing={3}>
+  {products.map((data) => (
+    <Grid item xs={12} md={6} lg={3} key={data._id}>
+       <Link to={`/writemeai/${data._id}`}>
+        <CardItem elevation={3}>
+          {/* <a href="https://findmyaitool.com/category/copywriting" target="_blank" rel="noopener noreferrer" /> */}
+          <img
+            src={Aiimage2}
+            alt="Card 1 Image"
+            style={{ width: '100%', borderRadius: '10px' }}
+          />
+            <Typography variant="h6">{data.title}</Typography>
+            <Typography variant="body2">{`${data.description.slice(0, 50)}...`}</Typography>
+          <ButtonContainer>
+            <VisitButton
+              variant="contained"
+              href="https://www.writeme.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit
+            </VisitButton>
+            <SaveButton variant="contained">Save</SaveButton>
+          </ButtonContainer>
+        </CardItem>
+      </Link>
+    </Grid>
+  ))}
+</CardListContainer2>
                 <OverlappingCardContainer container spacing={3}>
 
                 </OverlappingCardContainer>
 
 
             </FeaturedToolsContainer>
-           
+
             <Footer>
                 <Typography variant="body2">
                     © 2023 Your Company Name. All rights reserved.

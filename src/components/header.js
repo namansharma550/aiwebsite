@@ -26,7 +26,7 @@ const Header = () => {
       <Toolbar sx={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' }}>
         <div>
         
-        <a href="/home"> <img src={logo} alt=" Logo"   style={{ height: '50px', width: 'auto',marginTop:'10px' }} className={useStyles.logo} /></a>
+          <img src={logo} alt=" Logo" style={{ height: '50px', width: 'auto',marginTop:'10px' }} className={useStyles.logo} />
           
           <Typography variant="h6" sx={{ ...useStyles.title, marginBottom: '10px' }}>
         
@@ -38,15 +38,15 @@ const Header = () => {
           <Button color="inherit" sx={{ marginBottom: '8px' }} href='/home'>
             Home
           </Button>
-          <Button color="inherit" sx={{ marginBottom: '8px' }} href='/aicategory'>
+          <Button color="inherit" sx={{ marginBottom: '8px' }} href='/category'>
            Category
           </Button>
-          {/* <Button color="inherit" sx={{ marginBottom: '8px' }}>
+          <Button color="inherit" sx={{ marginBottom: '8px' }}>
             Blog
           </Button>
           <Button color="inherit" sx={{ marginBottom: '8px' }} href='/login'>
             Login
-          </Button> */}
+          </Button>
           <Button color="inherit" sx={{ ...useStyles.button, marginBottom: '10px' }}>
             Contact
           </Button>

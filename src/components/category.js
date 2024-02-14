@@ -248,7 +248,7 @@ const Categeory = () => {
     
     const getproductbycategeory = (productId) => {
         axios
-          .get(`${apiUrl}/category/getall`)
+          .get(`${apiUrl}/tool/getbycategory/${productId}`)
           .then((response) => {
             console.log( response.data);
             const firstFourItems = response.data.slice(0, 4);

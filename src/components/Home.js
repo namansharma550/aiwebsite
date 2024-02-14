@@ -274,7 +274,7 @@ const Home = () => {
       .then((response) => {
         console.log(response.data);
 
-        const firstFourItems = response.data.slice(0, 8);
+        const firstFourItems = response.data.slice(0, 4);
         setProduct(firstFourItems);
       })
       .catch((err) => {
@@ -292,7 +292,7 @@ const Home = () => {
         <Grid container spacing={3}>
           <Grid item md={8}>
             <HeaderPaper elevation={3}>
-              <Typography variant="h3">Discover the Power of AI</Typography>
+              <Typography variant="h3">Discover the Power of AI Used</Typography>
             </HeaderPaper>
             <MainContentPaper elevation={3}>
               <StyledTypography variant="h4">
@@ -348,7 +348,7 @@ const Home = () => {
                       style={{ width: "100%", borderRadius: "10px" }}
                     />
                     <Typography variant="h6">{data.title}</Typography>
-                    <Typography variant="body2">{`${data.description.slice(0, 50)}...`}</Typography>
+                    <Typography variant="body2">{data.description}</Typography>
                   </CardItem>
                 </Link>
               </Grid>
@@ -360,8 +360,8 @@ const Home = () => {
       <FeaturedToolsContainer elevation={3}>
         <FeaturedToolsHeading variant="h4">Featured Tools</FeaturedToolsHeading>
 
-        <CardListContainer container spacing={6}>
-            {product.map((data) => (
+        <CardListContainer container spacing={3}>
+            {category.map((data) => (
               <Grid item xs={12} md={6} lg={3}>
                 <Link to={`/aicategory/${data._id}`}>
                   <CardItem elevation={3}>
@@ -371,7 +371,7 @@ const Home = () => {
                       style={{ width: "100%", borderRadius: "10px" }}
                     />
                     <Typography variant="h6">{data.title}</Typography>
-                    <Typography variant="body2">{`${data.description.slice(0,150)}...`}</Typography>
+                    <Typography variant="body2">{data.description}</Typography>
                     <ButtonContainer>
                   <VisitButton
                     variant="contained"
@@ -389,7 +389,34 @@ const Home = () => {
             ))}
           </CardListContainer>
 
-        
+        <CardListContainer2 container spacing={3}>
+            {category.map((data) => (
+              <Grid item xs={12} md={6} lg={3}>
+                <Link to={`/aicategory/${data._id}`}>
+                  <CardItem elevation={3}>
+                    <img
+                      src={Aiimage2}
+                      alt="Card 1 Image"
+                      style={{ width: "100%", borderRadius: "10px" }}
+                    />
+                    <Typography variant="h6">{data.title}</Typography>
+                    <Typography variant="body2">{data.description}</Typography>
+                    <ButtonContainer>
+                  <VisitButton
+                    variant="contained"
+                    href={data.ink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit
+                  </VisitButton>
+                  <SaveButton variant="contained">Save</SaveButton>
+                </ButtonContainer>
+                  </CardItem>
+                </Link>
+              </Grid>
+            ))}
+          </CardListContainer2>
       </FeaturedToolsContainer>
 
       <Footer>
